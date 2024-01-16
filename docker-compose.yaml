@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  vaultwarden:
+    image: vaultwarden/server:latest
+    ports:
+      - "8080:80"
+    container_name: vaultwarden
+    restart: always
+    environment:
+      - WEBSOCKET_ENABLED=true
+      - SIGNUPS_ALLOWED=true
+      - INVITATIONS_ALLOWED=false
+    volumes:
+      - vaultwarden_data:/data
+    networks:
+      - vaultwarden_network
+
+networks:
+  vaultwarden_network:
+    external: true
+
+volumes:
+  vaultwarden_data: {}
